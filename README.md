@@ -3,7 +3,7 @@
 Creates a criterion that measures the mean absolute error (MAE) between each element in the input $\mathbf{x}$ and target $\mathbf{y}$.
 
 **Formula (LaTeX):**
-$$ \text{L1Loss}(\mathbf{x}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} |x_i - y_i| $$
+$ \text{L1Loss}(\mathbf{x}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} |x_i - y_i| $
 
 **PyTorch Command:**
 ```python
