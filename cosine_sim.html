@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vector Cosine Similarity</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    #canvas {
+        border: 1px solid #000;
+        width: 400px;
+        height: 400px;
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+<div>
+    <label for="magnitude">Magnitude:</label>
+    <input type="range" id="magnitude" min="0" max="200" value="100">
+</div>
+<div>
+    <label for="angle">Angle:</label>
+    <input type="range" id="angle" min="0" max="360" value="45">
+</div>
+<div id="canvas"></div>
+<div id="similarity"></div>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const magnitudeInput = document.getElementById('magnitude');
+    const angleInput = document.getElementById('angle');
+    const similarityDisplay = document.getElementById('similarity');
+
+    let vector1 = { x: 1, y: 1 }; // Fixed vector
+    let vector2 = { x: 1, y: 1 }; // Dynamic vector
+
+    function drawVectors() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw x-axis
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height / 2);
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.stroke();
+
+        // Draw y-axis
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, 0);
+        ctx.lineTo(canvas.width / 2, canvas.height);
+        ctx.stroke();
+
+        // Draw fixed vector
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, canvas.height / 2);
+        ctx.lineTo(canvas.width / 2 + vector1.x * 20, canvas.height / 2 - vector1.y * 20);
+        ctx.strokeStyle = 'blue';
+        ctx.stroke();
+
+        // Draw dynamic vector
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, canvas.height / 2);
+        ctx.lineTo(canvas.width / 2 + vector2.x * 20, canvas.height / 2 - vector2.y * 20);
+        ctx.strokeStyle = 'red';
+        ctx.stroke();
+
+        // Calculate cosine similarity
+        const dotProduct = vector1.x * vector2.x + vector1.y * vector2.y;
+        const magnitude1 = Math.sqrt(vector1.x ** 2 + vector1.y ** 2);
+        const magnitude2 = Math.sqrt(vector2.x ** 2 + vector2.y ** 2);
+        const cosineSimilarity = dotProduct / (magnitude1 * magnitude2);
+        similarityDisplay.textContent = `Cosine Similarity: ${cosineSimilarity.toFixed(2)}`;
+    }
+
+    function updateVector() {
+        const magnitude = parseFloat(magnitudeInput.value);
+        const angle = parseFloat(angleInput.value);
+        vector2.x = Math.cos(angle * Math.PI / 180) * magnitude;
+        vector2.y = Math.sin(angle * Math.PI / 180) * magnitude;
+        drawVectors();
+    }
+
+    magnitudeInput.addEventListener('input', updateVector);
+    angleInput.addEventListener('input', updateVector);
+
+    drawVectors();
+</script>
+</body>
+</html>
