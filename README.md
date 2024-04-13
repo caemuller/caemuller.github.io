@@ -1,6 +1,6 @@
-### Distance Functions
+### Distance Functions 😲
 
-#### nn.CosineSimilarity
+#### nn.CosineSimilarity 
 
 Returns the cosine similarity between $\mathbf{x}_1$ and $\mathbf{x}_2$, computed along a specified dimension.
 
@@ -30,6 +30,15 @@ $\[
 \]$
 
 where $n$ is the dimensionality of the vectors $\mathbf{x}_1$ and $\mathbf{x}_2$, and $\mathbf{x}_{1i}$ and $\mathbf{x}_{2i}$ are the $i$-th components of $\mathbf{x}_1$ and $\mathbf{x}_2$, respectively.
+
+### demonstration
+
+## Pairwise Distance
+
+Pairwise distance can be visualized using this simple HTML code snippet It helps demonstrate a key issue with this distance metric: it only considers the spatial separation between points, disregarding any differences in magnitude. For example, if one point has five times the magnitude of another but the same angle, the distance between them remains the same. You can interact with the code below to explore this concept further 😡.
+
+<iframe srcdoc="<html><head><style>body{font-family: Arial, sans-serif;}canvas{border:1px solid #000;width:400px;height:400px;margin-bottom:20px;}</style></head><body><div><label for='x1'>Point 1 - X Coordinate:</label><input type='number' id='x1' value='1'><label for='y1'>Y Coordinate:</label><input type='number' id='y1' value='1'></div><div><label for='x2'>Point 2 - X Coordinate:</label><input type='number' id='x2' value='2'><label for='y2'>Y Coordinate:</label><input type='number' id='y2' value='2'></div><canvas id='canvas'></canvas><div id='distance'></div><script>const canvas=document.getElementById('canvas');const ctx=canvas.getContext('2d');const x1Input=document.getElementById('x1');const y1Input=document.getElementById('y1');const x2Input=document.getElementById('x2');const y2Input=document.getElementById('y2');const distanceDisplay=document.getElementById('distance');let point1={x:parseFloat(x1Input.value),y:parseFloat(y1Input.value)};let point2={x:parseFloat(x2Input.value),y:parseFloat(y2Input.value)};function drawPoints(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.beginPath();ctx.arc(point1.x*20+canvas.width/2,-point1.y*20+canvas.height/2,5,0,Math.PI*2);ctx.fillStyle='blue';ctx.fill();ctx.beginPath();ctx.arc(point2.x*20+canvas.width/2,-point2.y*20+canvas.height/2,5,0,Math.PI*2);ctx.fillStyle='red';ctx.fill();ctx.beginPath();ctx.moveTo(point1.x*20+canvas.width/2,-point1.y*20+canvas.height/2);ctx.lineTo(point2.x*20+canvas.width/2,-point2.y*20+canvas.height/2);ctx.strokeStyle='black';ctx.stroke();const distance=Math.sqrt((point2.x-point1.x)**2+(point2.y-point1.y)**2);distanceDisplay.textContent=`Distance: ${distance.toFixed(2)}`;}function updatePoints(){point1.x=parseFloat(x1Input.value);point1.y=parseFloat(y1Input.value);point2.x=parseFloat(x2Input.value);point2.y=parseFloat(y2Input.value);drawPoints();}x1Input.addEventListener('input',updatePoints);y1Input.addEventListener('input',updatePoints);x2Input.addEventListener('input',updatePoints);y2Input.addEventListener('input',updatePoints);drawPoints();</script></body></html>" width="400" height="450"></iframe>
+
 
 # References
 [Pythorch](https://pytorch.org/docs/stable/nn.html)
