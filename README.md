@@ -15,7 +15,17 @@ Dropout is implemented as a layer in neural networks, typically applied after fu
 #### Dropout Procedure
 
 1. **During Training**: 
-   - For each training example, a binary mask is sampled from a Bernoulli distribution with a given probability \( p \). $Pr(X=1) = p = 1- Pr(X=0) = 1 - q, \\f(x)=p \text{ if} k = 1 \text{ else} q \text{ if} k = 0$
+   - For each training example, a binary mask is sampled from a Bernoulli distribution with a given probability:
+  ```
+\[
+  f(k;p) =
+  \begin{cases}
+    p     & \text{if $k = 1$}, \\
+    1 - p & \text{if $k = 0$}.
+  \end{cases}
+\]
+```
+     
    - The binary mask is multiplied element-wise with the activations of the neurons in the layer.
    - The result is passed to the next layer for further processing.
 
