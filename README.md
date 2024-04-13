@@ -1,236 +1,38 @@
-## nn.L1Loss
+## Dropout Layers
 
-Creates a criterion that measures the mean absolute error (MAE) between each element in the input $\mathbf{x}$ and target $\mathbf{y}$.
+### Introduction
 
-**Formula (LaTeX):**
-$ \text{L1Loss}(\mathbf{x}, \mathbf{y}) = \frac{1}{n} \sum_{i=1}^{n} |x_i - y_i| $
+Dropout is a regularization technique used in neural networks to prevent overfitting by randomly dropping out (i.e., setting to zero) a proportion of input units during training. This prevents units from co-adapting too much to each other and encourages robust representations to emerge.
 
-**PyTorch Command:**
-```python
-loss_function = nn.L1Loss()
-```
+### Original Paper
 
----
+Srivastava et al. introduced dropout in their paper titled ["Dropout: A Simple Way to Prevent Neural Networks from Overfitting"](http://www.jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf), published in the *Journal of Machine Learning Research* in 2014.
 
-## nn.PoissonNLLLoss
+### Dropout layers overview
 
-Negative log likelihood loss with Poisson distribution of target.
+Dropout is implemented as a layer in neural networks, typically applied after fully connected layers or convolutional layers. The key idea is to randomly deactivate a fraction of neurons during each training iteration. This is done by multiplying the activations of the neurons by a binary mask, where each element of the mask is set to either 0 or 1 with a specified probability.
 
-**Formula (LaTeX):**
-Not available.
+#### Dropout Procedure
 
-**PyTorch Command:**
-```python
-loss_function = nn.PoissonNLLLoss()
-```
+1. **During Training**: 
+   - For each training example, a binary mask is sampled from a Bernoulli distribution with a given probability \( p \). $Pr(X=1) = p = 1- Pr(X=0) = 1 - q, \\f(x)=p \text{ if} k = 1 \text{ else} q \text{ if} k = 0$
+   - The binary mask is multiplied element-wise with the activations of the neurons in the layer.
+   - The result is passed to the next layer for further processing.
 
----
+2. **During Testing**:
+   - No dropout is applied during testing. Instead, the activations are scaled by \( (1 - p) \) to compensate for the dropout applied during training. This ensures that the expected output remains approximately the same during training and testing.
 
-## nn.GaussianNLLLoss
+#### Benefits of Dropout
 
-Gaussian negative log likelihood loss.
+- **Regularization**: Dropout acts as a form of regularization by preventing overfitting. It discourages complex co-adaptations of neurons, forcing the network to learn more robust features.
+  
+- **Ensemble Learning**: Dropout can be interpreted as training multiple models with shared parameters. Each sampled binary mask corresponds to a different subnetwork, and averaging their predictions during testing resembles ensemble learning.
 
-**Formula (LaTeX):**
-Not available.
+- **Efficient Training**: Dropout can speed up training by effectively sampling from an exponential number of different network architectures, thereby reducing the risk of getting stuck in local minima.
 
-**PyTorch Command:**
-```python
-loss_function = nn.GaussianNLLLoss()
-```
+### Dropout Layers in Pytorch
 
----
 
-## nn.KLDivLoss
-
-The Kullback-Leibler divergence loss.
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.KLDivLoss()
-```
-
----
-
-## nn.BCELoss
-
-Creates a criterion that measures the Binary Cross Entropy between the target and the input probabilities:
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.BCELoss()
-```
-
----
-
-## nn.BCEWithLogitsLoss
-
-This loss combines a Sigmoid layer and the BCELoss in one single class.
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.BCEWithLogitsLoss()
-```
-
----
-
-## nn.MarginRankingLoss
-
-Creates a criterion that measures the loss given inputs $\mathbf{x_1}$, $\mathbf{x_2}$, two 1D mini-batch or 0D Tensors, and a label 1D mini-batch or 0D Tensor $\mathbf{y}$ (containing 1 or -1).
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.MarginRankingLoss()
-```
-
----
-
-## nn.HingeEmbeddingLoss
-
-Measures the loss given an input tensor $\mathbf{x}$ and a labels tensor $\mathbf{y}$ (containing 1 or -1).
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.HingeEmbeddingLoss()
-```
-
----
-
-## nn.MultiLabelMarginLoss
-
-Creates a criterion that optimizes a multi-class multi-classification hinge loss (margin-based loss) between input $\mathbf{x}$ (a 2D mini-batch Tensor) and output $\mathbf{y}$ (which is a 2D Tensor of target class indices).
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.MultiLabelMarginLoss()
-```
-
----
-
-## nn.HuberLoss
-
-Creates a criterion that uses a squared term if the absolute element-wise error falls below delta and a delta-scaled L1 term otherwise.
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.HuberLoss()
-```
-
----
-
-## nn.SmoothL1Loss
-
-Creates a criterion that uses a squared term if the absolute element-wise error falls below beta and an L1 term otherwise.
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.SmoothL1Loss()
-```
-
----
-
-## nn.SoftMarginLoss
-
-Creates a criterion that optimizes a two-class classification logistic loss between input tensor $\mathbf{x}$ and target tensor $\mathbf{y}$ (containing 1 or -1).
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.SoftMarginLoss()
-```
-
----
-
-## nn.MultiLabelSoftMarginLoss
-
-Creates a criterion that optimizes a multi-label one-versus-all loss based on max-entropy, between input $\mathbf{x}$ and target $\mathbf{y}$ of size $(N,C)$.
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.MultiLabelSoftMarginLoss()
-```
-
----
-
-## nn.CosineEmbeddingLoss
-
-Creates a criterion that measures the loss given input tensors $\mathbf{x_1}$, $\mathbf{x_2}$ and a Tensor label $\mathbf{y}$ with values 1 or -1.
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.CosineEmbeddingLoss()
-```
-
----
-
-## nn.MultiMarginLoss
-
-Creates a criterion that optimizes a multi-class classification hinge loss (margin-based loss) between input $\mathbf{x}$ (a 2D mini-batch Tensor) and output $\mathbf{y}$ (which is a 1D tensor of target class indices, $0 ≤ y ≤ x.size(1)−1$).
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.MultiMarginLoss()
-```
-
----
-
-## nn.TripletMarginLoss
-
-Creates a criterion that measures the triplet loss given an input tensors $\mathbf{x_1}$, $\mathbf{x_2}$, $\mathbf{x_3}$ and a margin with a value greater than $0$.
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.TripletMarginLoss()
-```
-
----
-
-## nn.TripletMarginWithDistanceLoss
-
-Creates a criterion that measures the triplet loss given input tensors $\mathbf{a}$, $\mathbf{p}$, and $\mathbf{n}$ (representing anchor, positive, and negative examples, respectively), and a nonnegative, real-valued function ("distance function") used to compute the relationship between the anchor and positive example ("positive distance") and the anchor and negative example ("negative distance").
-
-**Formula (LaTeX):**
-Not available.
-
-**PyTorch Command:**
-```python
-loss_function = nn.TripletMarginWithDistanceLoss()
-```
-
+# References
+[Pythorch Dropout layers](https://pytorch.org/docs/stable/nn.html#dropout-layers)
+[Deep NLP](http://www.deepnlp.org/blog/probability-distribution-formulas)
