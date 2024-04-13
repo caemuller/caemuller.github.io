@@ -16,15 +16,9 @@ Dropout is implemented as a layer in neural networks, typically applied after fu
 
 1. **During Training**: 
    - For each training example, a binary mask is sampled from a Bernoulli distribution with a given probability:
-  ```
-\[
-  f(k;p) =
-  \begin{cases}
-    p     & \text{if $k = 1$}, \\
-    1 - p & \text{if $k = 0$}.
-  \end{cases}
-\]
-```
+<img src="https://render.githubusercontent.com/render/math?math=f(k;p)%20=%20%0A%20%20%20%20%5Cbegin%7Bcases%7D%0A%20%20%20%20%20%20p%20%20%20%20%20%20%26%20%5Ctext%7Bif%20%7D%20k%20%3D%201%2C%20%5C%5C%0A%20%20%20%20%20%201%20-%20p%20%26%20%5Ctext%7Bif%20%7D%20k%20%3D%200.%0A%20%20%20%20%5Cend%7Bcases%7D">
+
+
      
    - The binary mask is multiplied element-wise with the activations of the neurons in the layer.
    - The result is passed to the next layer for further processing.
