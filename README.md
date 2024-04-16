@@ -102,9 +102,11 @@ Computes the pairwise distance between input vectors or between columns of input
 
 Mathematically, pairwise distance is often computed using the Euclidean distance formula:
 
-$\[
+$$
+\[
 \text{Pairwise Distance}(\mathbf{x}_1, \mathbf{x}_2) = \sqrt{\sum_{i=1}^{n} (\mathbf{x}_{1i} - \mathbf{x}_{2i})^2} 
-\]$
+\]
+$$
 
 where $n$ is the dimensionality of the vectors $\mathbf{x}_1$ and $\mathbf{x}_2$, and $\mathbf{x}_{1i}$ and $\mathbf{x}_{2i}$ are the $i$-th components of $\mathbf{x}_1$ and $\mathbf{x}_2$, respectively.
 
