@@ -1,5 +1,12 @@
 <script> MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } }; </script> <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"> </script> <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"> </script>
 
+# GANs and other image generation Models
+Please Download the presentation doing the entire derivation of Diffusion Models loss function, Original GANs loss function, Variational AutoEncoders and a quick introduction to Kullback-Leibler Divergence.
+
+<a href="https://raw.githubusercontent.com/caemuller/caemuller.github.io/Cae-diffusion-models.pdf" download>Download PDF</a>
+
+
+
 # Distance Functions 😲
 
 
