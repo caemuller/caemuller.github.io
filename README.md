@@ -3,7 +3,7 @@
 # GANs and other image generation Models
 Please Download the presentation doing the entire derivation of Diffusion Models loss function, Original GANs loss function, Variational AutoEncoders and a quick introduction to Kullback-Leibler Divergence.
 
-<a href="https://raw.githubusercontent.com/caemuller/caemuller.github.io/Cae-diffusion-models.pdf" download>Download PDF</a>
+<a href="[https://raw.githubusercontent.com/caemuller/caemuller.github.io/Cae-diffusion-models.pdf](https://github.com/caemuller/caemuller.github.io/blob/main/Cae-diffusion-models.pdf)" </a>
 
 
 
